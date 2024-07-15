@@ -3,13 +3,14 @@ import Reviews from "./Reviews";
 import Footer from "./Footer";
 import Header from "./Header";
 import { Carousel } from "react-responsive-carousel";
+import { FloatingWhatsApp } from "react-floating-whatsapp";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import CSS
 
 function Home() {
   const companyInfo = {
-    companyName: "The Fours Hotel",
+    companyName: "Hetelogix",
     address: "Nairobi, Nrb 44773, Kenya",
-    email: "thefourshotel@gmail.com",
+    email: "hetelogix@gmail.com",
     phone: "+254704372525",
   };
 
@@ -137,6 +138,25 @@ function Home() {
         {/* Reviews */}
         <Reviews />
       </div>
+
+      {/* Floating WhatsApp */}
+      <FloatingWhatsApp
+        phoneNumber="+254793057720"
+        accountName="Hetelogix"
+        statusMessage="Awesome Room Booking App"
+        avatar="./src/assets/favicon-32x32.png"
+        chatMessage="Hello, how can we help you?"
+        darkMode
+        allowEsc
+        allowClickAway
+        notification
+        notificationSound
+        notificationColor="green"
+        notificationTitle="Chat with us"
+        notificationMessage="Thank you for your message"
+        notificationTimestamp="Just now"
+        notificationDuration={2000}
+      />
 
       {/* Footer */}
       <Footer companyInfo={companyInfo} />

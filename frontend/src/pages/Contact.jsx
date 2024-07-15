@@ -12,8 +12,7 @@ function Contact() {
   const [message, setMessage] = useState("");
 
   const scriptURL =
-    "https://script.google.com/macros/s/AKfycbwW0yK6duE5_Y0o7OkezYHDBUOs8zAwYyAAisZVfsDyCoC2s2fSFNRZk709BABN4DqQMg/exec";
-
+    "https://script.google.com/macros/s/AKfycbyI04ke_TVCc4ANx4GymYEUb7BwYbMn2d2JO5OExSYdC45w3m42H5xDh11Qdc7HA1nKSA/exec";
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -42,7 +41,7 @@ function Contact() {
       <Header />
     <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md mt-10">
       <h1 className="text-2xl font-bold mb-4">Contact Us</h1>
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4" onSubmit={handleSubmit} name="submit-to-google-sheet">
         <div>
           <label
             htmlFor="name"

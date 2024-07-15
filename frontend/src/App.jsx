@@ -36,7 +36,7 @@ function App() {
             <Route element={<PrivateRoute />}>
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/" element={<Home />} />
+              <Route path="/reviews-form" element={<Reviews_Form />} />
             </Route>
 
             {/* Route for login */}
@@ -54,6 +54,7 @@ function App() {
             <Route path="/admin/profile" element={<AdminProfile />} />
 
             {/* Public routes */}
+            <Route path="/" element={<Home />} />
             <Route path="/room-list" element={<RoomList />} />
             <Route path="/hotels" element={<Hotels />} />
             <Route path="/hotel/:hotelId/rooms" element={<HotelRooms />} />

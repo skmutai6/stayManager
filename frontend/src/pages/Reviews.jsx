@@ -80,7 +80,7 @@ const Reviews = () => {
                     <svg
                       key={index}
                       className="h-5 w-5 fill-current text-yellow-400"
-                      viewBox="0 0 20 20"
+                      viewBox="0 0 28 28"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
