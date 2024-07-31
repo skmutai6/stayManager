@@ -3,8 +3,8 @@ from models import User, Hotel, Room, Booking, Review
 import os
 
 # Set up connections to both databases
-local_db_url = 'sqlite:///hotel.db?mode=rw'  # or your local PostgreSQL URL
-render_db_url = os.environ.get('DATABASE_URL')  # Make sure this is set in your environment
+local_db_url = 'sqlite:///hotel.db?mode=rw'  # or local PostgreSQL URL
+render_db_url = os.environ.get('DATABASE_URL')  # set in environment
 
 def transfer_data():
     with app.app_context():

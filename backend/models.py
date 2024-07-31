@@ -70,7 +70,7 @@ class Room(db.Model):
     
     # relationships
     bookings = db.relationship('Booking', backref='room', lazy='dynamic')
-    reviews = db.relationship('Review', backref='room', lazy='dynamic')
+    # reviews = db.relationship('Review', backref='room', lazy='dynamic')
     # hotel = db.relationship('Hotel', back_populates='rooms')
 
 class Booking(db.Model):
@@ -89,7 +89,7 @@ class Review(db.Model):
     # __tablename__ = 'review'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), nullable=False)
+    username = db.Column(db.String(100), nullable=False)
     comment = db.Column(db.Text, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)

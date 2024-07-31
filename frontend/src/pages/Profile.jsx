@@ -8,6 +8,7 @@ import UpdateProfileForm from './UpdateProfileForm';
 function Profile() {
   const { currentUser } = useContext(UserContext);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   const openUpdateForm = () => {
     setShowUpdateForm(true);
@@ -21,22 +22,33 @@ function Profile() {
     return <div>Loading...</div>;
   }
 
+   const toggleNav = () => {
+     setIsNavOpen(!isNavOpen);
+   };
+  
+
   return (
     <div>
-      <Header />
+      <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-2xl font-bold mb-4">Profile</h2>
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Username:</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Username:
+            </label>
             <div className="text-gray-900">{currentUser.username}</div>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Email:
+            </label>
             <div className="text-gray-900">{currentUser.email}</div>
           </div>
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Phone Number:</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Phone Number:
+            </label>
             <div className="text-gray-900">{currentUser.phone_number}</div>
           </div>
           {!showUpdateForm && (
@@ -51,7 +63,10 @@ function Profile() {
           )}
           {showUpdateForm && (
             <div className="mt-4">
-              <UpdateProfileForm currentUser={currentUser} onClose={closeUpdateForm} />
+              <UpdateProfileForm
+                currentUser={currentUser}
+                onClose={closeUpdateForm}
+              />
             </div>
           )}
         </div>

@@ -151,6 +151,11 @@ export default function AdminRooms({ onAddRoom }) {
               ) : (
                 <>
                   <div>
+                    <img
+                      src={room.image}
+                      alt={room.description}
+                      className="w-full h-64 object-cover rounded-lg mb-4"
+                    />
                     <p className="text-lg font-semibold text-gray-200 mb-2">
                       Room {room.room_number}
                     </p>

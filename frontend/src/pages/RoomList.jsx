@@ -7,6 +7,7 @@ import { FaSpinner } from "react-icons/fa";
 function RoomList() {
   const [rooms, setRooms] = useState([]);
   const [error, setError] = useState(null);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     fetchRooms();
@@ -31,10 +32,14 @@ function RoomList() {
     }
   };
 
+   const toggleNav = () => {
+     setIsNavOpen(!isNavOpen);
+   };
+
   if (error) {
     return (
       <>
-        <Header />
+        <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
         <div className="container mx-auto py-8">
           <p className="text-red-500 text-center">{error}</p>
         </div>
@@ -45,7 +50,7 @@ function RoomList() {
   if (!rooms) {
     return (
       <>
-        <Header />
+        <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
         <div className="container mx-auto py-8">
           <div className="flex justify-center">
             <FaSpinner className="animate-spin text-4xl text-indigo-600" />
@@ -57,11 +62,11 @@ function RoomList() {
 
   return (
     <>
-      <Header />
-      <div className="bg-gray-100 ml-20 mr-20">
+      <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
+      <div className="bg-gray-100 ml-8 mr-8 min-h-screen flex items-center justify-center">
         <div className="container mx-auto py-8">
-          <h1 className="text-3xl font-bold text-center text-indigo-600 mb-8">
-            Explore Our Rooms
+          <h1 className="text-2xl font-bold underline text-center mb-8">
+            Explore Hotel Rooms
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {rooms.map((room) => (

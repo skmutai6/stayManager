@@ -20,6 +20,7 @@ function Register() {
   const [phoneError, setPhoneError] = useState("");
   const [repeatPasswordError, setRepeatPasswordError] = useState("");
   const [generalError, setGeneralError] = useState("");
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
 
   // function handleSubmit(e) {
@@ -150,16 +151,18 @@ function Register() {
 
   function isPasswordValid(password) {
     const containsDigit = /\d/.test(password);
-    const isSequential = /(123|234|345|456|567|678|789|890)/.test(password);
+    const isSequential = /(123|234|345|456|567|678|789|890|901)/.test(password);
     
     return containsDigit && !isSequential;
   }
 
-  
+   const toggleNav = () => {
+     setIsNavOpen(!isNavOpen);
+   };
 
   return (
     <div>
-      <Header />
+      <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
       <div className="flex items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8 bg-white p-6 rounded-lg shadow-lg">
           <h1 className="text-3xl font-semibold mb-4 text-center text-blue-500">

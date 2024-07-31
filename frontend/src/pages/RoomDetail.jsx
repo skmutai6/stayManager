@@ -14,6 +14,7 @@ function RoomDetail() {
   const [checkOut, setCheckOut] = useState("");
   const [bookingError, setBookingError] = useState(null);
   const { id } = useParams();
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     fetchRoomDetail();
@@ -102,9 +103,13 @@ function RoomDetail() {
     );
   }
 
+   const toggleNav = () => {
+     setIsNavOpen(!isNavOpen);
+   };
+
   return (
     <>
-      <Header />
+      <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
       <div className="bg-gray-100 min-h-screen py-12 ml-14 mr-14">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl font-bold mb-8 text-center text-gray-900">

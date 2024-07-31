@@ -52,9 +52,13 @@ export const UserProvider = ({ children }) => {
         headers: { 'Content-type': 'application/json' },
       });
       const res = await response.json();
+
+      // console.log("Login response:", res);
       if (res.access_token) {
         setAuth_token(res.access_token);
         localStorage.setItem('access_token', res.access_token);
+        localStorage.setItem('user_id', res.user_id);
+        // console.log("User ID:", res.user_id);
         setCurrentUser(res.user);
         toast.success('Logged in Successfully!');
         nav(res.is_admin ? '/admin' : '/');
@@ -107,6 +111,7 @@ export const UserProvider = ({ children }) => {
       .then((res) => {
         if (res.success) {
           localStorage.removeItem('access_token');
+          localStorage.removeItem('user_id');
           setCurrentUser(null);
           setAuth_token(null);
           setOnChange(!onChange);
@@ -134,6 +139,7 @@ export const UserProvider = ({ children }) => {
             setCurrentUser(data);
           } else {
             localStorage.removeItem('access_token');
+            localStorage.removeItem('user_id');
             setCurrentUser(null);
             setAuth_token(null);
             nav('/login');

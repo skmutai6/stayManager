@@ -8,13 +8,13 @@ const Reviews = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [displayCount, setDisplayCount] = useState(6);
+  const [sortMethod, setSortMethod] = useState('recent'); // 'recent' or 'rating'
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const room_id = localStorage.getItem("room_id");
         const response = await fetch(
-          `${server_url}/reviews?room_id=${room_id}`,
+          `${server_url}/reviews`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -36,6 +36,20 @@ const Reviews = () => {
     fetchReviews();
   }, []);
 
+  useEffect(() => {
+    sortReviews();
+  }, [sortMethod]);
+
+  const sortReviews = () => {
+    let sortedReviews = [...reviews];
+    if (sortMethod === 'recent') {
+      sortedReviews.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    } else if (sortMethod === 'rating') {
+      sortedReviews.sort((a, b) => b.rating - a.rating);
+    }
+    setReviews(sortedReviews);
+  };
+
   const handleViewMore = () => {
     setDisplayCount((prevCount) => Math.min(prevCount + 6, reviews.length));
   };
@@ -44,7 +58,7 @@ const Reviews = () => {
     setDisplayCount(6);
   };
 
-  if (loading){
+  if (loading) {
     return (
       <div className="container mx-auto py-8">
         <div className="flex justify-center">
@@ -59,13 +73,23 @@ const Reviews = () => {
     <div className="bg-gray-100 py-12">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Reviews</h1>
-          <Link
-            to="/reviews/form"
-            className="bg-blue-400 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Add Review
-          </Link>
+          <h1 className="text-2xl font-bold">Reviews</h1>
+          <div className="flex items-center">
+            <select
+              value={sortMethod}
+              onChange={(e) => setSortMethod(e.target.value)}
+              className="mr-4 p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="recent">Most Recent</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+            <Link
+              to="/reviews/form"
+              className="bg-blue-400 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded focus:outline-none focus:shadow-outline transition duration-300"
+            >
+              Add Review
+            </Link>
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.slice(0, displayCount).map((review) => (
@@ -99,7 +123,9 @@ const Reviews = () => {
                   <b>Comment:</b> {review.comment}
                 </p>
                 <p className="text-gray-600 mt-2">
-                  <b>Date: {review.created_at}</b>
+                  <b>
+                    Date: <span className="text-blue-400 ml-2 text-sm">{review.created_at}</span>
+                  </b>
                 </p>
               </div>
             </div>

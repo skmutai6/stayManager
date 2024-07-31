@@ -8,6 +8,7 @@ function HotelRooms() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const { hotelId } = useParams(); //gets the hotelId from the URL
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     fetchRooms();
@@ -38,9 +39,13 @@ function HotelRooms() {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+   const toggleNav = () => {
+     setIsNavOpen(!isNavOpen);
+   };
+
   return (
     <div>
-      <Header />
+      <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
       <div className="bg-gray-100 py-8">
         <div className="container mx-auto">
           <h1 className="text-3xl font-semibold text-center mb-8">

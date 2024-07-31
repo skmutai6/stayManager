@@ -204,6 +204,17 @@ export default function AdminHotels() {
                       }
                       className="w-full p-2 mb-2 text-gray-800"
                     />
+                    <input
+                      type="text"
+                      value={editingHotel.image}
+                      onChange={(e) =>
+                        setEditingHotel({
+                          ...editingHotel,
+                          image: e.target.value,
+                        })
+                      }
+                      className="w-full p-2 mb-2 text-gray-800"
+                    />
                     <button
                       onClick={() => updateHotel(hotel.id)}
                       className="bg-green-500 text-white px-4 py-2 rounded mr-2"
@@ -218,26 +229,31 @@ export default function AdminHotels() {
                     </button>
                   </div>
                 ) : (
-                  <div>
+                  <div className="p-4">
+                    <img
+                      src={hotel.image}
+                      alt={hotel.name}
+                      className="w-full h-64 object-cover rounded-lg mb-4"
+                    />
                     <p className="text-lg font-semibold text-gray-200">
                       {hotel.name}
                     </p>
                     <p className="text-sm text-gray-400">{hotel.description}</p>
                     <button
                       onClick={() => setEditingHotel(hotel)}
-                      className="bg-yellow-500 text-white px-4 py-2 rounded mr-2 mt-2"
+                      className="bg-blue-500 text-white px-4 py-1 rounded mr-2 mt-2"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => deleteHotel(hotel.id)}
-                      className="bg-red-500 text-white px-4 py-2 rounded mt-2"
+                      className="bg-red-500 text-white px-4 py-1 rounded mt-2 "
                     >
                       Delete
                     </button>
                     <button
                       onClick={() => fetchRooms(hotel.id)}
-                      className="bg-purple-500 text-white px-4 py-2 rounded mt-2 ml-2"
+                      className="bg-indigo-500 text-white px-4 py-1 rounded mt-2  ml-2"
                     >
                       Show Rooms
                     </button>

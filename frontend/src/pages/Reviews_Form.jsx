@@ -8,6 +8,7 @@ export default function Reviews_Form() {
   const [rating, setRating] = useState("");
   const [comment, setComment] = useState("");
   const [username, setUsername] = useState("");
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,14 +16,19 @@ export default function Reviews_Form() {
   }, []);
 
   const fetchUsername = async () => {
-    try {
-      const userId = localStorage.getItem("user_id");
-      if (!userId) {
-        console.error("User ID not found in localStorage");
-        setUsername("Anonymous");
-        return;
-      }
+    const userId = localStorage.getItem("user_id");
+    // console.log("User ID:", userId);
 
+    if (!userId) {
+      console.error("User ID not found in localStorage");
+      toast.error(
+        "You need to be logged in to submit a review. Please login or create an account."
+      );
+      navigate("/login");
+      return;
+    }
+
+    try {
       const response = await fetch(`${server_url}/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -34,22 +40,23 @@ export default function Reviews_Form() {
       const userData = await response.json();
       setUsername(userData.username);
     } catch (error) {
-      console.error("Error fetching username:", error);
-      setUsername("Anonymous");
+      console.error("Error fetching user data:", error);
+      toast.error("Failed to fetch user data. Please try logging in again.");
+      navigate("/login");
     }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const userId = localStorage.getItem("user_id");
     if (!userId) {
-      console.error("User ID not found in localStorage");
       toast.error(
         "You need to be logged in to submit a review. Please login or create an account."
       );
       navigate("/login");
       return;
     }
-
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
     try {
       const response = await fetch(`${server_url}/reviews`, {
@@ -59,9 +66,11 @@ export default function Reviews_Form() {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
         body: JSON.stringify({
-          username,
+          user_id: localStorage.getItem("user_id"),
+          room_id: localStorage.getItem("room_id"),
           rating: parseInt(rating),
           comment,
+          username,
         }),
       });
 
@@ -71,21 +80,40 @@ export default function Reviews_Form() {
       }
 
       toast.success("Review submitted successfully!");
-      navigate("/reviews");
+      navigate("/");
     } catch (error) {
       console.error("Error submitting review:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("Request:", error.request);
+      } else {
+        console.error("Error message:", error.message);
+      }
       toast.error(
-        error.message || "Failed to submit review. Please try again later."
+        error.response?.data?.error ||
+          error.message ||
+          "Failed to submit review. Please try again later."
       );
     }
+  };
+  
+  const handleRatingChange = (event) => {
+    setRating(event.target.value);
+  };
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
   };
 
   return (
     <>
-      <Header />
-      <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 min-h-screen flex items-center justify-center">
+      <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
+      <div className="bg-gradient-to-r from-blue-300 via-blue-500 to-indigo-700 min-h-screen flex items-center justify-center">
         <div className="container mx-auto px-4 py-8 bg-white shadow-lg rounded-lg">
-          <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">
+          <h1 className="text-2xl font-bold underline mb-4 text-center text-gray-800">
             Add Your Review
           </h1>
 
@@ -113,7 +141,7 @@ export default function Reviews_Form() {
                 id="rating"
                 className="form-select px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
                 value={rating}
-                onChange={(e) => setRating(e.target.value)}
+                onChange={handleRatingChange}
                 required
               >
                 <option value="">Select a rating</option>

@@ -76,8 +76,8 @@ function Home() {
       title: "Relaxing View",
     },
     {
-      url: "https://images.unsplash.com/photo-1600435335786-d74d2bb6de37?q=80&w=1460&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Relaxing View",
+      url: "https://images.unsplash.com/photo-1590447158019-883d8d5f8bc7?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "Awesome view",
     },
     {
       url: "https://images.unsplash.com/photo-1600435335786-d74d2bb6de37?q=80&w=1460&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -86,7 +86,7 @@ function Home() {
   ];
 
   return (
-    <div style={{ minHeight: "100vh" }}>
+    <div style={{ minHeight: "100vh" }} className="smooth-scroll">
       {/* Header */}
       <div style={headerStyle}>
         <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
@@ -112,12 +112,15 @@ function Home() {
                   backgroundImage: `url(${image.url})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
-                  height: "calc(100vh - 150px)", // Adjusted height
+                  height: "calc(80vh - 150px)", // Adjusted height
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   color: "#fff",
                   textAlign: "center",
+                  "@media (min-width: 768px)": {
+                    height: "calc(100vh - 150px)", // Height for larger screens
+                  },
                 }}
               >
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -144,7 +147,8 @@ function Home() {
         phoneNumber="+254793057720"
         accountName="Hetelogix"
         statusMessage="Awesome Room Booking App"
-        avatar="./src/assets/favicon-32x32.png"
+        avatar="./src/assets/favicon.ico"
+        banner="./src/assets/favicon.ico"
         chatMessage="Hello, how can we help you?"
         darkMode
         allowEsc

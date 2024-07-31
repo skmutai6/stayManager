@@ -55,8 +55,6 @@ export default function Footer({ companyInfo }) {
               <p className="text-sm text-white">{companyInfo.email}</p>
               <p className="text-sm text-white">{companyInfo.phone}</p>
             </div>
-            {/* Grid column */}
-            {/* Grid column */}
             <div className="mb-4">
               {/* Links */}
               <h6 className="text-xs text-white uppercase font-bold mb-2">
@@ -83,8 +81,6 @@ export default function Footer({ companyInfo }) {
                 </a>
               </p>
             </div>{" "}
-            {/* Grid column */}
-            {/* Grid column */}
             <div className="mb-4">
               {/* Links */}
               <h6 className="text-xs text-white uppercase font-bold mb-2">
@@ -111,8 +107,6 @@ export default function Footer({ companyInfo }) {
                 </a>
               </p>
             </div>
-            {/* Grid column */}
-            {/* Grid column */}
             <div className="mb-4">
               {/* Links */}
               <h6 className="text-xs text-white uppercase font-bold mb-2">
@@ -122,23 +116,20 @@ export default function Footer({ companyInfo }) {
                 <i className="fas fa-home me-2"></i> Nairobi, Nrb 44773, Kenya
               </p>
               <p className="text-sm text-white">
-                <i className="fas fa-envelope me-2"></i> thefourshotel@gmail.com
+                <i className="fas fa-envelope me-2"></i> 
+                {companyInfo.email}
               </p>
               <p className="text-sm text-white">
-                <i className="fas fa-phone me-2"></i> +254704372525
+                <i className="fas fa-phone me-2"></i> {companyInfo.phone}
               </p>
               <p className="text-sm text-white">
                 <i className="fas fa-print me-2"></i> +254797274881
               </p>
             </div>
-            {/* Grid column */}
           </div>
-          {/* Grid row */}
         </div>
       </section>
-      {/* Section: Links */}
 
-      {/* Copyright */}
       <div className="text-center py-4 bg-blue-600 text-white">
         © {new Date().getFullYear()} Copyright:
         <a href="#" className="text-white font-bold">

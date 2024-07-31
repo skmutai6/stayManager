@@ -8,6 +8,7 @@ function Hotels() {
   const [hotels, setHotels] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     fetchHotels();
@@ -21,7 +22,7 @@ function Hotels() {
         },
       });
 
-      console.log("response", response);
+      // console.log("response", response);
       if (!response.ok) {
         throw new Error("Failed to fetch hotels");
       }
@@ -35,25 +36,33 @@ function Hotels() {
     }
   };
 
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <FaSpinner className="animate-spin" />
-      </div>
+      <>
+        <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
+        <div className="flex justify-center items-center h-screen">
+          <FaSpinner className="animate-spin" />
+        </div>
+      </>
     );
   }
 
   if (error) {
-    return <div>{error}, login</div>
+    return <div className=" container mx-auto py-8 text-center text-red-500">{error}, login</div>
   }
+
 
   return (
     <div>
-      <Header />
+      <Header toggleNav={toggleNav} isNavOpen={isNavOpen} />
 
       <div className="bg-gray-100 py-8">
         <div className="container mx-auto">
-          <h1 className="text-3xl font-semibold text-center mb-8">Hotels</h1>
+          <h1 className="text-2xl underline font-semibold text-center mb-8">Hotels</h1>
 
           {/* Hotel Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

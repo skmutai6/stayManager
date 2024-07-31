@@ -1,63 +1,15 @@
-# Hotel Management System 
+# Hotel Management System
 
-## Project Description
 Welcome to stayManager, a comprehensive web application for managing hotel accommodations while providing seamless user experiences for customers and efficient management tools for administrators.
 
+### Project Overview
 ---
-- Backend: Flask + SQLite
-- Frontend: React + Vite
+- Backend: Flask
+- Frontend: React
 
-## Setup/Installation Requirements
-- Fork and Clone this repository; `git clone https://github.com/spookeyy/stayManager`
-- Navigate to the directory and `cd stayManager` folder in your terminal.
-- use `code . ` command to open the folder in VScode
+### Netlify Link 
+- https://stay-manager-mg.netlify.app/
 
-## Getting started
-- Run this commands to get started:
-On your VsCode IDE: navigate to backend `cd backend` and run the following commands:
-  ```bash
-  pipenv install
-  pipenv shell
-  python3 seed.py
-  flask run
-  ```
-Now your backend is running. Lets try to run the frontend.
-On your terminal, navigate to frontend `cd frontend` and run the following commands:
-  ```bash
-  npm install
-  npm run dev
-  ```
-  or
-  ```bash
-  yarn install
-  yarn dev
-  ```
-  - And the application is running in the browser.
-
-## Live link
-#### Tools used: 
-- `Netlify` - deploy react frontend
-- `Render` - deploy backend (mock server)
-  
-Deployed Frontend can be accessed here https://stay-manager-mg.netlify.app
-
-Deployed Backend can be accessed here https://staymanager-1.onrender.com
-
-
-## Technologies used
-#### Frontend
-    - React Js
-    - Vite
-    - React Router
-    - Tailwind CSS
-#### Backend
-    - Flask
-    - Python
-    - SQLite
-    - Flask-SQLAlchemy
-#### package managers
-- ```npm``` conversant with ```yarn```
-    
 ## Key Features
 ---
 ### User
@@ -137,6 +89,24 @@ Deployed Backend can be accessed here https://staymanager-1.onrender.com
    - Allow customers to leave reviews and ratings for hotels or travel experiences.
 
 ---
+
+## Endpoints
+   - Run **pipenv install**, and **pipenv shell** to enter the virtual environment.
+   - Run **python3 seed.py** inside the backend to generate dummy data and **flask run** to launch the backend.
+   - The base url for the backend is; https://staymanager-1.onrender.com
+   - Run **npm install** to install dependencies for the frontend.
+   - Use command **npm run dev** to run frontend.
+   - Live view url; https://stay-manager-mg.netlify.app
+---
+
+### Technologies used
+-   JS
+-   REACT
+-   HTML
+-   TAILWIND CSS
+-   Python
+-   Flask
+
 ### Support and contact details
 Email and Phone: sarahscarlet641@gmail.com || +254704372525
 
@@ -147,5 +117,5 @@ Email and Phone: pangasmeshack@gmail.com || +254793057720
 Email and Phone: skmutai6@gmail.com || +254723486218
 
  
-## License
+License
 Licensed under the MIT Licence Copyright (c) 2024 ** Scarlet Sarah ** Peter Mbugua ** Meshack Pangas ** Shadrack Mutai.
